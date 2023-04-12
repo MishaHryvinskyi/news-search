@@ -50,4 +50,5 @@ function updateNewsList(markup) {
 
 function onError (err) {
     console.error(err);
+    updateNewsList("<p class='not-found'>NOT FOUND!</p>");
 }

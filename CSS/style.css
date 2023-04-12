@@ -71,3 +71,9 @@ input[type="submit"]:hover {
     margin-right: auto;
     border-radius: 0.4em;
 }
+
+.not-found {
+    color:red;
+    font-size: large;
+    font-weight: 700;
+}
