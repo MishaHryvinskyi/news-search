@@ -3,6 +3,7 @@ import { getNews } from "./api.js";
 const refs = {
     form: document.getElementById('form'),
     newsWrapper: document.getElementById('newsWrapper'),
+    loadMore: document.getElementById('loadMore'),
 };
 
 refs.form.addEventListener('submit', onSubmit);
