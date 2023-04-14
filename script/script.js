@@ -2,9 +2,6 @@
 
 import { getNews } from "./api.js";
 
-const result = getNews("cat");
-console.log(result);
-
 const refs = {
     form: document.getElementById('form'),
     newsWrapper: document.getElementById('newsWrapper'),
@@ -12,20 +9,19 @@ const refs = {
 
 refs.form.addEventListener('submit', onSubmit);
 
-function onSubmit (evt) {
-    evt.preventDefault();
-    const form = evt.currentTarget;
-    const inputValue = (form.elements.news.value);
-    getNews(inputValue).then(({ articles }) => { 
+function onSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const inputValue = form.elements.news.value;
+    getNews(inputValue)
+    .then(({ articles }) => { 
         console.log(articles);
-    
     if(articles.length === 0) throw new Error('No data!');
 
     const markup = articles.reduce(
         (markup, articles) => markup + createMarkup(articles),
          ""
          );
-         console.log(markup);
          updateNewsList(markup);
 })
     .catch(onError)
