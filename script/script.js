@@ -1,10 +1,15 @@
 import { getNews } from "./api.js";
-
+import LoadeMoreBtn from "./components/LoadMoreBtn.js";
 const refs = {
     form: document.getElementById('form'),
     newsWrapper: document.getElementById('newsWrapper'),
-    loadMore: document.getElementById('loadMore'),
 };
+
+const loadeMoreBtn = new LoadeMoreBtn({
+    selector:"#loadMore",
+    isHidden: true,
+});
+console.log(loadeMoreBtn);
 
 refs.form.addEventListener('submit', onSubmit);
 

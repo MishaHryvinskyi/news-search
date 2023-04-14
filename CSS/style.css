@@ -31,6 +31,9 @@ button[type="button"] {
     margin-top: 30px;
 }
 
+button:disabled {
+    background-color: rgb(123, 124, 125);
+}
 input[type="submit"]:hover {
     background-color: rgb(5, 104, 71);
     color: rgb(166, 211, 192);
