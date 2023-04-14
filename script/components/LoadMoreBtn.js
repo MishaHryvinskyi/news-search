@@ -8,6 +8,12 @@ export default class LoadeMoreBtn {
     }
 
     disable(){
-        
+        this.button.disabled = true;
+        this.button.textContent = "Loading...";
+    }
+
+    enable(){
+        this.button.disabled = false;
+        this.button.textContent = "Load More";
     }
 }

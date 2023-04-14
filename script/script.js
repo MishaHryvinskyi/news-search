@@ -10,6 +10,9 @@ const loadeMoreBtn = new LoadeMoreBtn({
     isHidden: true,
 });
 console.log(loadeMoreBtn);
+loadeMoreBtn.disable();
+
+setInterval(() => loadeMoreBtn.enable(), 3000);
 
 refs.form.addEventListener('submit', onSubmit);
 
