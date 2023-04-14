@@ -2,7 +2,7 @@
 
 import { getNews } from "./api.js";
 
-const result = getNews("world cup");
+const result = getNews("cat");
 console.log(result);
 
 const refs = {
