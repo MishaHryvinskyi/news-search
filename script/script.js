@@ -1,40 +1,55 @@
-import { getNews } from "./api.js";
+
+import NewsApiService from "./NewsApiService.js";
 import LoadeMoreBtn from "./components/LoadMoreBtn.js";
+
 const refs = {
     form: document.getElementById('form'),
     newsWrapper: document.getElementById('newsWrapper'),
-};
+}; //знаходимо елементи розмітки
 
-const loadeMoreBtn = new LoadeMoreBtn({
+const newsApiService = new NewsApiService(); //обєкт за допомогою якого ми керуємо запитами
+
+const loadeMoreBtn = new 
+LoadeMoreBtn({
     selector:"#loadMore",
     isHidden: true,
-});
-console.log(loadeMoreBtn);
-loadeMoreBtn.disable();
+}); // поточна кнопка з методами для керування станами кнопки
 
-setInterval(() => loadeMoreBtn.enable(), 3000);
 
-refs.form.addEventListener('submit', onSubmit);
+refs.form.addEventListener('submit', onSubmit); //вішаєм подію сабміту
+loadeMoreBtn.button.addEventListener('click', fetchArticles); //виклик функції фетчАртікалі по кліку
 
 function onSubmit(e) {
     e.preventDefault();
+    loadeMoreBtn.show();
     const form = e.currentTarget;
-    const inputValue = form.elements.news.value;
-    getNews(inputValue)
-    .then(({ articles }) => { 
-        console.log(articles);
+    newsApiService.query = form.elements.news.value; 
+
+    newsApiService.resetPage();
+    clearNewsList();
+    fetchArticles().finally(() => form.reset());
+}
+
+
+function fetchArticles(){
+    loadeMoreBtn.disable();
+    return getArticlesMarkup().then((markup) => {
+        updateNewsList(markup);
+        loadeMoreBtn.enable();
+    })
+    .catch(onError);    
+}
+
+function getArticlesMarkup(){
+    return newsApiService.getNews().then(({ articles }) => { 
     if(articles.length === 0) throw new Error('No data!');
 
-    const markup = articles.reduce(
+    return articles.reduce(
         (markup, articles) => markup + createMarkup(articles),
          ""
          );
-         updateNewsList(markup);
-})
-    .catch(onError)
-    .finally(() => form.reset())
+    });
 }
-
 
 function createMarkup({ title, author, url, urlToImage, description }) {
     return `<div class="card">
@@ -48,10 +63,16 @@ function createMarkup({ title, author, url, urlToImage, description }) {
 }
 
 function updateNewsList(markup) {
-    refs.newsWrapper.innerHTML = markup;
+    refs.newsWrapper.insertAdjacentHTML("beforeend", markup);
+}
+
+function clearNewsList() {
+    refs.newsWrapper.innerHTML = "";
 }
 
 function onError (err) {
     console.error(err);
+    loadeMoreBtn.hide();
+    clearNewsList();
     updateNewsList("<p class='not-found'>NOT FOUND!</p>");
 }

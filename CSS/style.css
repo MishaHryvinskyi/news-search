@@ -1,4 +1,4 @@
-input[type="text"] {
+ input[type="text"] {
     height: 50px;
     width: 300px;
     border: 2px solid blue;
@@ -34,6 +34,11 @@ button[type="button"] {
 button:disabled {
     background-color: rgb(123, 124, 125);
 }
+
+.hidden {
+    display: none;
+}
+
 input[type="submit"]:hover {
     background-color: rgb(5, 104, 71);
     color: rgb(166, 211, 192);
@@ -45,13 +50,12 @@ button[type="button"]:hover {
 }
 
 .card {
-    width: 700px;
-    height: auto;
-    background: rgb(238, 242, 240);
+    width: 454px;
+    height: 590px;
+    background: rgb(226, 212, 228);
     border-radius: 0.4em;
     box-shadow: 0.3em 0.3em 0.7em #00000015;
     transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: rgb(185, 185, 185) 0.2em solid;
     margin-left: 10px;
     margin-top: 30px;
     padding: 15px;
@@ -76,8 +80,8 @@ button[type="button"]:hover {
 }
 
 .article-img {
-    width: 570px;
-    height: 320px;
+    width: 440px;
+    height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
